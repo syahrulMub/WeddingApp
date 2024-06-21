@@ -5,11 +5,6 @@ import AppRoutes from './AppRoutes';
 import { Layout } from './components/Layout';
 import './custom.css';
 import 'devextreme/dist/css/dx.light.css';
-import { 
-  Button,
-  DataGrid,
-  GridColumn as Column
-} from "./devextreme-bundle/devextreme-react-bundle";
 
 export default class App extends Component {
   static displayName = App.name;
