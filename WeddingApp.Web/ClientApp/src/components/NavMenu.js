@@ -1,42 +1,74 @@
-import React, { Component } from 'react';
-import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
-import { Link } from 'react-router-dom';
-import './NavMenu.css';
+import React, { Component } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faCalendar,
+  faDatabase,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  Collapse,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+  NavLink,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import "./NavMenu.css";
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor(props) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
     };
   }
 
-  toggleNavbar () {
+  toggleNavbar() {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
     });
   }
 
   render() {
     return (
       <header>
-        <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" container light>
-          <NavbarBrand tag={Link} to="/">WeddingApp.Web</NavbarBrand>
+        <Navbar
+          className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+          container
+          light
+        >
+          <NavbarBrand tag={Link} to="/">
+            WeddingApp
+          </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse className="d-sm-inline-flex flex-sm-row-reverse" isOpen={!this.state.collapsed} navbar>
+          <Collapse
+            className="d-sm-inline-flex flex-sm-row-reverse"
+            isOpen={!this.state.collapsed}
+            navbar
+          >
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/">
+                  <FontAwesomeIcon icon={faHome} className="pr-2" />
+                  Home
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/counter">
+                  <FontAwesomeIcon icon={faCalendar} className="pr-2" />
+                  Counter
+                </NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/fetch-data">
+                  <FontAwesomeIcon icon={faDatabase} className="pr-2" />
+                  Fetch data
+                </NavLink>
               </NavItem>
             </ul>
           </Collapse>
