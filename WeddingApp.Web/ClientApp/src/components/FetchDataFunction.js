@@ -9,6 +9,8 @@ import DataGrid, {
   SearchPanel,
   Search,
 } from "devextreme-react/cjs/data-grid";
+import "devextreme-react/text-area";
+import { Item } from "devextreme-react/form";
 
 export default function FetchDataGrid() {
   const [forecasts, setForecasts] = useState([]);
@@ -31,7 +33,7 @@ export default function FetchDataGrid() {
   );
 
   async function populateWeatherData() {
-    const response = await fetch("weatherforecast", {
+    const response = await fetch("ItemType/GetAll", {
       method: "GET",
     });
     const data = await response.json();

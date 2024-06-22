@@ -1,6 +1,8 @@
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using Microsoft.EntityFrameworkCore;
+using N.EntityFrameworkCore.Extensions;
 using WeddingApp.BusinessLogic.DatabaseContext;
 using WeddingApp.BusinessLogic.DatabaseContext.Entity;
 using WeddingApp.BusinessLogic.DatabaseContext.Entity.Interface;
@@ -52,6 +54,15 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
         _context.Set<TEntity>().Update(entity);
         await _context.SaveChangesAsync();
         return entity;
+    }
+    public async Task UpdateBatch(List<TEntity> entities, int userId)
+    {
+        var now = DateTime.Now;
+        entities.ForEach(i => {
+            i.UpdatedDate = now;
+            i.UpdatedBy = userId;
+        });
+        await _context.BulkUpdateAsync(entities);
     }
     public async Task<TEntity> SoftDelete(int id, int userId)
     {

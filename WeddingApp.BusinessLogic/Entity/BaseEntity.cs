@@ -1,9 +1,9 @@
 using System.ComponentModel.DataAnnotations;
 using WeddingApp.BusinessLogic.DatabaseContext.Entity.Interface;
 
-namespace WeddingApp.BusinessLogic.DatabaseContext.Entity;
+namespace WeddingApp.BusinessLogic.DatabaseContext.BaseEntity;
 
-public class Entity : IEntity
+public class BaseEntity : IEntity
 {
     [Key]
     public int Id { get; set; }

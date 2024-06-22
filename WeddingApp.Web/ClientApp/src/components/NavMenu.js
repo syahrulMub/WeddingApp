@@ -43,7 +43,7 @@ export class NavMenu extends Component {
           light
         >
           <NavbarBrand tag={Link} to="/">
-            WeddingApp
+            Wedding Program
           </NavbarBrand>
           <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
           <Collapse
@@ -53,20 +53,29 @@ export class NavMenu extends Component {
           >
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">
-                  <FontAwesomeIcon icon={faHome} className="pr-2" />
+                <NavLink tag={Link} className="text-dark " to="/">
+                  <FontAwesomeIcon
+                    icon={faHome}
+                    className="pr-2 text-green-300"
+                  />
                   Home
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/counter">
-                  <FontAwesomeIcon icon={faCalendar} className="pr-2" />
+                  <FontAwesomeIcon
+                    icon={faCalendar}
+                    className="pr-2 text-red-400"
+                  />
                   Counter
                 </NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/fetch-data">
-                  <FontAwesomeIcon icon={faDatabase} className="pr-2" />
+                  <FontAwesomeIcon
+                    icon={faDatabase}
+                    className="pr-2 text-blue-400"
+                  />
                   Fetch data
                 </NavLink>
               </NavItem>
