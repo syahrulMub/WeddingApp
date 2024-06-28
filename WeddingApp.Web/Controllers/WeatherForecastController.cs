@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WeddingApp.BusinessLogic.Repository.Interface;
 
 namespace WeddingApp.Web.Controllers;
 
@@ -10,23 +11,31 @@ public class WeatherForecastController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
-
+    private readonly IItemTypeRepository _itemTypeRepository;
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(IItemTypeRepository itemTypeRepository,ILogger<WeatherForecastController> logger)
     {
+        _itemTypeRepository = itemTypeRepository;
         _logger = logger;
     }
 
     [HttpGet]
-    public IEnumerable<WeatherForecast> Get()
+    public ActionResult Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var result = Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
             TemperatureC = Random.Shared.Next(-20, 55),
             Summary = Summaries[Random.Shared.Next(Summaries.Length)]
         })
         .ToArray();
+        return Ok(result);
+    }
+    [HttpGet]
+    [Route("GetItemType")]
+    public IActionResult GetItemType()
+    {
+        return Ok(_itemTypeRepository.GetAll());
     }
 }

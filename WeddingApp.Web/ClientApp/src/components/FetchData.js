@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FetchDataGrid from "./FetchDataFunction";
 import ODataStore from "devextreme/data/odata/store";
+import DataGridComponent from "./ItemType";
 
 export class FetchData extends Component {
   static displayName = FetchData.name;
@@ -55,6 +56,9 @@ export class FetchData extends Component {
         {contents}
         <div>
           <FetchDataGrid></FetchDataGrid>
+        </div>
+        <div>
+          <DataGridComponent></DataGridComponent>
         </div>
       </div>
     );

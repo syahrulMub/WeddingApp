@@ -47,11 +47,17 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
         await _context.SaveChangesAsync();
         return entity;
     }
-    public async Task<TEntity> Update(TEntity entity, int userId)
+    public async Task<TEntity> Update(int id, TEntity entity, int userId)
     {
-        entity.UpdatedDate = DateTime.Now;
-        entity.UpdatedBy = userId;
-        _context.Set<TEntity>().Update(entity);
+        var entityToUpdate = await _context.Set<TEntity>().FindAsync(id);
+        if(entityToUpdate == null)
+        {
+            return entityToUpdate;
+        }
+        entity = entityToUpdate; 
+        entityToUpdate.UpdatedDate = DateTime.Now;
+        entityToUpdate.UpdatedBy = userId;
+        _context.Set<TEntity>().Update(entityToUpdate);
         await _context.SaveChangesAsync();
         return entity;
     }

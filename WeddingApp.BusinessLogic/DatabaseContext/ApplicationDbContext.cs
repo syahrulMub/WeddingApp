@@ -9,17 +9,9 @@ public class ApplicationDbContext : DbContext
     public DbSet<Item> Items { get; set; }
     public DbSet<ItemType> ItemTypes { get; set; }
     
-    public ApplicationDbContext() 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
     {   
     }
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-{
-    if (!optionsBuilder.IsConfigured)
-    {
-        var connectionString = "Data Source=Database/WeddingApp.db";
-        optionsBuilder.UseSqlite(connectionString);
-    }
-}
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);

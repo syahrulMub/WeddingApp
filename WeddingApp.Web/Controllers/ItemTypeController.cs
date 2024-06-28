@@ -1,45 +1,50 @@
+﻿using DevExtreme.AspNet.Data;
 using Microsoft.AspNetCore.Mvc;
 using WeddingApp.BusinessLogic.Entity;
 using WeddingApp.BusinessLogic.Repository.Interface;
 
 namespace WeddingApp.Web.Controllers;
+
 [ApiController]
-[Route("[Controller]")]
-public class ItemTypeController : Controller
+[Route("[controller]")]
+public class ItemTypeController : ControllerBase
 {
     private readonly IItemTypeRepository _itemTypeRepo;
-    private readonly ILogger<ItemTypeController> _logger;
-    public ItemTypeController(IItemTypeRepository itemTypeRepo, ILogger<ItemTypeController> logger)
+    private readonly ILogger<IItemTypeRepository> _logger;
+
+    public ItemTypeController(IItemTypeRepository itemTypeRepo,ILogger<IItemTypeRepository> logger)
     {
         _itemTypeRepo = itemTypeRepo;
         _logger = logger;
     }
+    // [HttpGet]
+    // public IActionResult GetAll(DataSourceLoadOptionsBase loader)
+    // {
+    //     var result = DataSourceLoader.Load(_itemTypeRepo.GetAll(),loader);
+    //     return Ok(result);
+    // }
     [HttpGet]
     public IActionResult GetAll()
     {
-        return Ok(_itemTypeRepo.GetAll());
-    }
-    [HttpGet]
-    [Route("GetById/{id}")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        return Ok(await _itemTypeRepo.GetById(id));
+        var result = _itemTypeRepo.GetAll();
+        return Ok(result);
     }
     [HttpPost]
-    public async Task<IActionResult> Add(ItemType itemType)
+    public async Task<IActionResult> Add(ItemType model)
     {
-        return Ok(await _itemTypeRepo.Add(itemType, 1));
+        var result = await _itemTypeRepo.Add(model,1);
+        return Ok(result);
     }
     [HttpPut]
-    public async Task<IActionResult> Update(ItemType itemType)
+    public async Task<IActionResult> Update(int id, ItemType model)
     {
-        return Ok(await _itemTypeRepo.Update(itemType, 1));
+        var result = await _itemTypeRepo.Update(id,model,1);
+        return Ok(result);
     }
     [HttpDelete]
-    public async Task<IActionResult> DeleteAsync(int id)
+    public async Task<IActionResult> Delete(int id)
     {
-        return Ok(await _itemTypeRepo.SoftDelete(id, 1));
+        var result = await _itemTypeRepo.SoftDelete(id,1);
+        return Ok(result);
     }
-
-
 }
