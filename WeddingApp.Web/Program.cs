@@ -1,9 +1,16 @@
+
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using WeddingApp.BusinessLogic.BusinessLogic;
+using WeddingApp.BusinessLogic.BusinessLogic.Interface;
 using WeddingApp.BusinessLogic.DatabaseContext;
 using WeddingApp.BusinessLogic.DatabaseContext.BaseEntity;
 using WeddingApp.BusinessLogic.DatabaseContext.Entity.Interface;
+using WeddingApp.BusinessLogic.Dtos;
+using WeddingApp.BusinessLogic.Repository;
 using WeddingApp.BusinessLogic.Repository.Interface;
+using WeddingApp.Web.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +28,11 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<IEntity, BaseEntity>();
-builder.Services.AddScoped<IItemTypeRepository, ItemTypeRepository>();
+// builder.Services.AddScoped<IEntity, BaseEntity>();
+// builder.Services.AddScoped<IRepository<BaseEntity>, BaseRepository<BaseEntity>>();
+// builder.Services.AddScoped<IItemTypeBusinessLogic, ItemTypeBusinessLogic>();
+builder.Services.AddClassesAsImplementedInterface(Assembly.GetAssembly(typeof(IRepository<>)),typeof(IRepository<>));
+builder.Services.AddClassesAsImplementedInterface(Assembly.GetAssembly(typeof(IBusinessLogic<>)), typeof(IBusinessLogic<>));
 
 builder.Services.AddCors(options =>
 {

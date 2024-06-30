@@ -8,5 +8,5 @@ public class Event : BaseEntity
 {
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public ICollection<EventItem> EventItems { get; set; } = null!;
+    public ICollection<EventItem>? EventItems { get; set; }
 }

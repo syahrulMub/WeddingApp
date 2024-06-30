@@ -8,5 +8,5 @@ public class Item : BaseEntity
     public string Description { get; set; } = null!;
     public int ItemTypeId { get; set; }
     public virtual ItemType ItemType { get; set; } = null!;
-    public virtual ICollection<EventItem> EventItems { get; set; } = null!;
+    public virtual ICollection<EventItem>? EventItems { get; set; }
 }

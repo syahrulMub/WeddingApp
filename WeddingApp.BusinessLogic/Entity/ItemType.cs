@@ -6,5 +6,5 @@ public class ItemType : BaseEntity
 {
     public string Name { get; set; } = null!;
     public string Description { get; set; } = null!;
-    public ICollection<Item> Items { get; set; } = null!;
+    public virtual ICollection<Item>? Items { get; set; }
 }

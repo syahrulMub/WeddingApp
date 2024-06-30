@@ -11,12 +11,10 @@ public class WeatherForecastController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
-    private readonly IItemTypeRepository _itemTypeRepository;
     private readonly ILogger<WeatherForecastController> _logger;
 
-    public WeatherForecastController(IItemTypeRepository itemTypeRepository,ILogger<WeatherForecastController> logger)
+    public WeatherForecastController(ILogger<WeatherForecastController> logger)
     {
-        _itemTypeRepository = itemTypeRepository;
         _logger = logger;
     }
 
@@ -32,10 +30,5 @@ public class WeatherForecastController : ControllerBase
         .ToArray();
         return Ok(result);
     }
-    [HttpGet]
-    [Route("GetItemType")]
-    public IActionResult GetItemType()
-    {
-        return Ok(_itemTypeRepository.GetAll());
-    }
+
 }

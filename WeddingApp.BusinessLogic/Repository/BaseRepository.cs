@@ -47,17 +47,12 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
         await _context.SaveChangesAsync();
         return entity;
     }
-    public async Task<TEntity> Update(int id, TEntity entity, int userId)
+    public async Task<TEntity> Update( TEntity entity, int userId)
     {
-        var entityToUpdate = await _context.Set<TEntity>().FindAsync(id);
-        if(entityToUpdate == null)
-        {
-            return entityToUpdate;
-        }
-        entity = entityToUpdate; 
-        entityToUpdate.UpdatedDate = DateTime.Now;
-        entityToUpdate.UpdatedBy = userId;
-        _context.Set<TEntity>().Update(entityToUpdate);
+        entity.IsActive = true;
+        entity.UpdatedDate = DateTime.Now;
+        entity.UpdatedBy = userId;
+        _context.Entry(entity).State = EntityState.Modified;
         await _context.SaveChangesAsync();
         return entity;
     }
@@ -84,16 +79,16 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
         await _context.SaveChangesAsync();
         return entity;
     }
-    public async Task<TEntity> Delete(int id, int userId)
+    public async Task<int> Delete(int id, int userId)
     {
         var entity = await _context.Set<TEntity>().FindAsync(id);
         if(entity == null)
         {
-            return entity;
+            return 0;
         }
         _context.Set<TEntity>().Remove(entity);
-        await _context.SaveChangesAsync();   
-        return entity;
+        return await _context.SaveChangesAsync();   
+        
     }
     public IQueryable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression)
     {
