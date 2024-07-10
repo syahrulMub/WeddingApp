@@ -9,31 +9,37 @@ import DataGrid, {
   Paging,
   Lookup,
   Form,
+  saveButton,
+  cancelButton,
 } from "devextreme-react/data-grid";
 import "devextreme-react/text-area";
-import { Item } from "devextreme-react/form";
+import { Item, ButtonItem, ButtonOptions } from "devextreme-react/form";
 import DataSource from "devextreme/data/data_source";
 import { sendingRequest } from "./Api";
 
 const DataGridComponent = () => {
-  const URL = "itemtype"; // Ganti dengan endpoint API Anda
-
-    let updateRow = function(e){
-        e.newData = { ...e.oldData, ...e.newData }
-    } 
-    const myStore = new DataSource({
-        key: "id",
-        load: () => sendingRequest(`${URL}`, "GET"),
-        insert: (values) => sendingRequest(`${URL}/Save`, "POST", values),
-        update: (key, values) => sendingRequest(`${URL}/Save`, "POST", values),
-        remove: (key) => sendingRequest(`${URL}/Delete/${key}`, "DELETE",  key ),
-        onRowUpdating: function (options) {
-            options.newData = { ...options.oldData, ...options.newData }
-        }
+  const URL = "itemtype";
+  let updateRow = function (e) {
+    e.newData = { ...e.oldData, ...e.newData };
+  };
+  const myStore = new DataSource({
+    key: "id",
+    load: () => sendingRequest(`${URL}`, "GET"),
+    insert: (values) => sendingRequest(`${URL}/Save`, "POST", values),
+    update: (key, values) => sendingRequest(`${URL}/Save`, "POST", values),
+    remove: (key) => sendingRequest(`${URL}/Delete/${key}`, "DELETE", key),
+    onRowUpdating: function (options) {
+      options.newData = { ...options.oldData, ...options.newData };
+    },
   });
 
-    return (
-        <DataGrid dataSource={myStore} key="id" showBorders={true} onRowUpdating={updateRow}>
+  return (
+    <DataGrid
+      dataSource={myStore}
+      key="id"
+      showBorders={true}
+      onRowUpdating={updateRow}
+    >
       <Paging enabled={true} />
       <Editing
         mode="popup"
@@ -58,6 +64,8 @@ const DataGridComponent = () => {
       <Column dataField="id" visible={false} />
       <Column dataField="name" />
       <Column dataField="description" caption="Description" />
+      <saveButton> useIcons={true}</saveButton>
+      <cancelButton> anjir</cancelButton>
     </DataGrid>
   );
 };

@@ -4,6 +4,7 @@ import {
   faHome,
   faCalendar,
   faDatabase,
+  faAnchorLock,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   Collapse,
@@ -77,6 +78,15 @@ export class NavMenu extends Component {
                     className="pr-2 text-blue-400"
                   />
                   Fetch data
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/item-type">
+                  <FontAwesomeIcon
+                    icon={faAnchorLock}
+                    className="pr-2 text-gray-600"
+                  />
+                  Item Type
                 </NavLink>
               </NavItem>
             </ul>
