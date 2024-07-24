@@ -20,6 +20,10 @@ const AppRoutes = [
     path: "/item-type",
     element: <ItemTypeMaster />,
   },
+  // {
+  //   path: "/form",
+  //   element: <Form />,
+  // },
 ];
 
 export default AppRoutes;
