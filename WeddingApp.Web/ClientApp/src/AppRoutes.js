@@ -2,6 +2,7 @@ import { Counter } from "./components/Counter";
 import { FetchData } from "./components/FetchData";
 import { Home } from "./components/Home";
 import { ItemTypeMaster } from "./components/ItemTypeMaster";
+import { Training } from "./components/Training";
 
 const AppRoutes = [
   {
@@ -19,6 +20,10 @@ const AppRoutes = [
   {
     path: "/item-type",
     element: <ItemTypeMaster />,
+  },
+  {
+    path: "/training",
+    element: <Training />,
   },
   // {
   //   path: "/form",

@@ -89,6 +89,15 @@ export class NavMenu extends Component {
                   Item Type
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/training">
+                  <FontAwesomeIcon
+                    icon={faAnchorLock}
+                    className="pr-2 text-gray-600"
+                  />
+                  Training React
+                </NavLink>
+              </NavItem>
             </ul>
           </Collapse>
         </Navbar>
