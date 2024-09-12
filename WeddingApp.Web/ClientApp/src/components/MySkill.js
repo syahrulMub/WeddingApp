@@ -1,20 +1,45 @@
 import React from "react";
+import { useState } from "react";
 
-function RenderSkill(props) {
-  return <li>I have learn {props.currentSkill}</li>;
-}
+
 function MySkill() {
-  const skills = ["Javascript", "CSS", "C#", "SQL"];
+  const [data, setData] = useState();
+return (
+  <div>
+    check coba
+  </div>
+)
+}
+
+function Squere({value, onSquereClick}){
   return (
     <div>
-      <h2>Skill</h2>
-      <ul>
-        {skills.map((skill) => (
-          <RenderSkill currentSkill={skill} />
-        ))}
-      </ul>
+      <p>{value}</p>
+      <button className="Squere" onClick={onSquereClick}>{value}</button>
     </div>
-  );
+  )
 }
 
+function Board({xIsNext, squeres, onPlay}){
+  function handleClick(i){
+    if (calculateWinner(squeres) ||squeres[i]){
+      return;
+    }
+
+    const winner = calculateWinner(squeres)
+  }
+}
+
+function calculateWinner(squares){
+  const lines = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+  ];
+}
 export default MySkill;
