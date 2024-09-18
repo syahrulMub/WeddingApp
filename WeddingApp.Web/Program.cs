@@ -19,7 +19,8 @@ builder.Services.AddMvc();
 
 // configuring database
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<ApplicationDbContext>(options =>{
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+{
     options.UseSqlite(connectionString);
 });
 
@@ -31,7 +32,7 @@ builder.Services.AddSwaggerGen();
 // builder.Services.AddScoped<IEntity, BaseEntity>();
 // builder.Services.AddScoped<IRepository<BaseEntity>, BaseRepository<BaseEntity>>();
 // builder.Services.AddScoped<IItemTypeBusinessLogic, ItemTypeBusinessLogic>();
-builder.Services.AddClassesAsImplementedInterface(Assembly.GetAssembly(typeof(IRepository<>)),typeof(IRepository<>));
+builder.Services.AddClassesAsImplementedInterface(Assembly.GetAssembly(typeof(IRepository<>)), typeof(IRepository<>));
 builder.Services.AddClassesAsImplementedInterface(Assembly.GetAssembly(typeof(IBusinessLogic<>)), typeof(IBusinessLogic<>));
 
 builder.Services.AddCors(options =>

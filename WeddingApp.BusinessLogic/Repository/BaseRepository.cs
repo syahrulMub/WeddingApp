@@ -18,7 +18,7 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
     }
     public IQueryable<TEntity> GetAll(bool includeDeleted = false)
     {
-        if(includeDeleted == true)
+        if (includeDeleted == true)
         {
             return _context.Set<TEntity>().AsNoTracking();
         }
@@ -29,7 +29,7 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
     }
     public async Task<TEntity> GetById(int id, bool includeDeleted = false)
     {
-        if(includeDeleted == true)
+        if (includeDeleted == true)
         {
             return await _context.Set<TEntity>().Where(x => x.Id == id).AsNoTracking().FirstOrDefaultAsync();
         }
@@ -47,7 +47,7 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
         await _context.SaveChangesAsync();
         return entity;
     }
-    public async Task<TEntity> Update( TEntity entity, int userId)
+    public async Task<TEntity> Update(TEntity entity, int userId)
     {
         entity.IsActive = true;
         entity.UpdatedDate = DateTime.Now;
@@ -59,7 +59,8 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
     public async Task UpdateBatch(List<TEntity> entities, int userId)
     {
         var now = DateTime.Now;
-        entities.ForEach(i => {
+        entities.ForEach(i =>
+        {
             i.UpdatedDate = now;
             i.UpdatedBy = userId;
         });
@@ -68,7 +69,7 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
     public async Task<TEntity> SoftDelete(int id, int userId)
     {
         var entity = await _context.Set<TEntity>().FindAsync(id);
-        if(entity == null)
+        if (entity == null)
         {
             return entity;
         }
@@ -82,13 +83,13 @@ public abstract class BaseRepository<TEntity> : IRepository<TEntity> where TEnti
     public async Task<int> Delete(int id, int userId)
     {
         var entity = await _context.Set<TEntity>().FindAsync(id);
-        if(entity == null)
+        if (entity == null)
         {
             return 0;
         }
         _context.Set<TEntity>().Remove(entity);
-        return await _context.SaveChangesAsync();   
-        
+        return await _context.SaveChangesAsync();
+
     }
     public IQueryable<TEntity> GetByCondition(Expression<Func<TEntity, bool>> expression)
     {
